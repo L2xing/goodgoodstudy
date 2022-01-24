@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -19,7 +18,7 @@ func findAllPid() []string {
 	// 获取System出现的位置
 	n := strings.Index(string(output), "System")
 	if n == -1 {
-		fmt.Println("no find")
+		Info.Println("No Find")
 		os.Exit(1)
 	}
 
@@ -33,9 +32,9 @@ func killProcess(appName string) bool {
 	command := exec.Command("TASKKILL", "/F", "/T", "/IM", appName)
 	output, err := command.Output()
 	if err != nil {
-		fmt.Println(err)
+		Error.Println(err)
 		return false
 	}
-	fmt.Println(string(output))
+	Error.Println(string(output))
 	return true
 }

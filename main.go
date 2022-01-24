@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/robfig/cron/v3"
 	"strings"
 	"time"
@@ -25,7 +24,7 @@ func newWithSeconds() *cron.Cron {
 
 func checkPid() {
 	clock, min, sec := time.Now().Clock()
-	fmt.Printf("%d:%d:%d 开始执行", clock, min, sec)
+	Info.Printf("%d:%d:%d 开始执行\n", clock, min, sec)
 	if !isTime() {
 		return
 	}
@@ -38,17 +37,16 @@ func checkPid() {
 			}
 		}
 	}
-	fmt.Printf("需要关闭的程序有：")
+	Info.Println("需要关闭的程序有：")
 	for _, r := range canDels {
-		fmt.Print(r, ", ")
+		Info.Println(r, ", ")
 	}
-	fmt.Println()
 	for _, del := range canDels {
 		b := killProcess(del)
 		if b {
-			fmt.Println(del, " 关闭成功")
+			Info.Println(del, "关闭失败")
 		} else {
-			fmt.Println(del, " 关闭失败")
+			Error.Println(del, "关闭失败")
 		}
 	}
 }

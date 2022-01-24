@@ -11,6 +11,9 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# 任何日志文件
+*.log
+
 # Dependency directories (remove the comment below to include it)
 target/
 .idea/

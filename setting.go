@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"strings"
 )
@@ -25,7 +24,7 @@ var cronStr string
 func readFile() []string {
 	file, err := ioutil.ReadFile(confFileLocal)
 	if err != nil {
-		fmt.Println("程序出错: 找不到配置文件")
+		Error.Println("程序出错，找不到配置文件")
 	}
 	s := string(file)
 	split := strings.Split(s, "\r\n")
@@ -48,8 +47,7 @@ func filterFile(strs []string) {
 	blackList = getBlackList(readNext(index[0], index[1], strs))
 	times = getTime(readNext(index[1], index[2], strs))
 	cronStr = getCron(readNext(index[2], len(strs), strs))
-	fmt.Println("配置文件加载..成功")
-
+	Info.Println("配置文件加载..成功")
 }
 
 func readNext(start int, end int, strs []string) []string {
